@@ -1,0 +1,172 @@
+<!--注释是代码之母-->
+{% extends 'base.html' %}
+
+{% block head %}
+    <section class="content-header">
+                <h1>
+                    会计费用统计增加
+                    <small>Look at count</small>
+                </h1>
+            </section>
+        {% endblock head %}
+{% block content %}
+
+    <div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="kant_name">会计姓名</label>
+                    <select name="kant_name" id="" class="form-control"  >
+                        {% for foo in kant_obj %}
+                            <option value="{{ foo.nid }}">{{ foo.name }}</option>
+
+                        {% endfor %}
+
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="title">公司名称</label>
+                    <select name="kant_name" id="" class="form-control"  >
+                        {% for foo in company_obj %}
+                            <option value="{{ foo.title.nid }}">{{ foo.title.name }}</option>
+
+                        {% endfor %}
+
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">联系人及电话</label>
+                    <input class="form-control" type="text" name="phone" id="phone">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="cost_enddate">会计费截止日期</label>
+                    <input class="form-control" type="date" name="cost_enddate" id="cost_enddate">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="price_year">会计费年付应收金额</label>
+                    <input class="form-control" type="text" name="price_year" id="price_year">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="state">企业存续情况</label>
+                    <select name="state" id="" class="form-control" >
+                        {% for foo in state_obj %}
+                            <option value="{{ foo.nid }}">{{ foo.state }}</option>
+
+                        {% endfor %}
+
+
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="newpay_year">新的收费期间(1年)</label>
+                    <input class="form-control" type="text" name="newpay_year" id="newpay_year">
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="price_month">本月应收费金额</label>
+                    <input class="form-control" type="text" name="price_month" id="price_month">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="control_enddate">税控收费截止日期</label>
+                    <input class="form-control" type="date" name="control_enddate" id="control_enddate">
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="control_price">税控收款</label>
+                    <input class="form-control" type="text" name="control_price" id="control_price">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="com_mod">小规模/一般人</label>
+                    <select name="com_mod" id="" class="form-control"  >
+                            <option value="1">小规模</option>
+                            <option value="2">一般人</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="kprice_start">会计费收费起始时间</label>
+                    <input class="form-control" type="date" name="kprice_start" id="kprice_start">
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="kprice_end">会计费收费终止时间</label>
+                    <input class="form-control" type="date" name="kprice_end" id="kprice_end">
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="remove_date">交接日期</label>
+                    <input class="form-control" type="date" name="remove_date" id="remove_date">
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="soles">销售</label>
+                    <select name="soles" id="" class="form-control" multiple >
+                        {% for foo in sole_obj %}
+                            <option value="{{ foo.nid }}">{{ foo.name }}</option>
+
+                        {% endfor %}
+
+
+                    </select>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label for="buss_price">工商年报</label>
+                    <input class="form-control" type="text" name="buss_price" id="buss_price">
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="message">备注</label>
+                    <input class="form-control" type="text" name="message" id="message">
+                </div>
+
+                <input type="submit" value="提交" class="btn btn-default pull-right">
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}

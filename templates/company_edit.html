@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>修改客户公司</title>
+{% endblock title %}
+
+ {% block head %}
+  <section class="content-header">
+      <h1>
+        修改客户公司
+        <small>Add kant</small>
+      </h1>
+    </section>
+  {% endblock head %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">代理记账客户公司</label>
+                    <input class="form-control" type="text" name="title" id="title" value="{{ company_obj.name }}">
+                </div>
+                <div class="form-group">
+                    <label for="phone">客户公司联系方式</label>
+                    <input class="form-control" type="text" name="phone" id="phone"  value="{{ company_obj.phone }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">备注</label>
+                    <input class="form-control" type="text" name="message" id="message" value="{{ company_obj.message }}">
+                </div>
+
+                <input type="submit" value="修改" class="btn btn-default pull-right">
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

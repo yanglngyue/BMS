@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>会计人员管理</title>
+{% endblock title %}
+
+ {% block head %}
+  <section class="content-header">
+      <h1>
+        查看会计人员列表
+        <small>Look at kant</small>
+      </h1>
+    </section>
+  {% endblock head %}
+
+ {% block content %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <a href="/kant_add/" class="btn btn-primary">新增会计人员</a>
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="tt">编号</th>
+                                    <th class="tt">会计姓名</th>
+                                    <th class="tt">联系方式</th>
+                                    <th class="tt">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for kant in kant_obj %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ kant.name }}</td>
+                                        <td>{{ kant.phone }}</td>
+                                        <td>
+                                            <a href="/kant_edit/{{ kant.pk }}" class="btn btn-warning btn-sm">编辑</a>
+                                            <a href="/kant_del/{{ kant.pk }}" class="btn btn-danger btn-sm">删除</a>
+                                        </td>
+                                    </tr>
+
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        <nav aria-label="Page navigation">
+      <ul class="pagination">
+          {{ page_info.pager|safe }}
+      </ul>
+    </nav>
+                        </div>
+                    </div>
+                </div>
+            {% endblock content %}
+

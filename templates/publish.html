@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>出版社管理</title>
+{% endblock title %}
+
+ {% block head %}
+  <section class="content-header">
+      <h1>
+        查看出版社
+        <small>Look at publish</small>
+      </h1>
+    </section>
+  {% endblock head %}
+
+ {% block content %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <a href="/publish_add/" class="btn btn-primary">添加出版社</a>
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="tt">编号</th>
+                                    <th class="tt">出版社</th>
+                                    <th class="tt">邮箱</th>
+                                    <th class="tt">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for publish in publish_list %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ publish.name }}</td>
+                                        <td>{{ publish.email }}</td>
+                                        <td>
+                                            <a href="/publish_edit/{{ publish.pk }}" class="btn btn-warning btn-sm">编辑</a>
+                                            <a href="/publish_delete/{{ publish.pk }}" class="btn btn-danger btn-sm">删除</a>
+                                        </td>
+                                    </tr>
+
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endblock content %}
+

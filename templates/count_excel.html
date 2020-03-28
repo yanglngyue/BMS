@@ -1,0 +1,133 @@
+<!--注释是代码之母-->
+{% extends 'base.html' %}
+
+{% block head %}
+            <section class="content-header">
+                <h1>
+                    会计费用统计
+                    <small>Look at count</small>
+                </h1>
+            </section>
+        {% endblock head %}
+
+{% block content %}
+    <div class="container">
+                 <!--search form (Optional)-->
+
+                    <div class="row">
+                        <div >
+
+                         <form action="/count_excel/" method="post" class="sidebar-form">
+                            {% csrf_token %}
+                            <div class="row">
+                                      <div class="col-lg-4">
+                                        <div class="input-group">
+                                          <span class="input-group-btn">
+                                            <button class="btn btn" type="submit">Go!</button>
+                                          </span>
+                                          <input type="text" class="form-control" placeholder="根据会计名称搜索..." name="kant_name">
+                                        </div><!-- /input-group -->
+                                      </div><!-- /.col-lg-6 -->
+
+
+                                      <div class="col-lg-4">
+                                        <div class="input-group">
+                                          <input type="month" class="form-control" placeholder="根据会计费快到期时间搜索 for..." name="kprice_end" >
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">Go!</button>
+                                          </span>
+                                        </div><!-- /input-group -->
+                                      </div>
+
+
+                                        <div class="col-lg-4">
+                                        <div class="input-group">
+                                          <input type="text" class="form-control" placeholder="根据公司名称搜索 for..." name="title" >
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">Go!</button>
+                                          </span>
+                                        </div><!-- /input-group -->
+                                      </div>
+
+
+                                    </div><!-- /.row -->
+
+
+            </form>
+
+                            <a href="/count_add/" class="btn btn-primary">添加会计费用统计表</a>
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="tt">编号</th>
+                                    <th class="tt">会计姓名</th>
+                                    <th class="tt">公司名称</th>
+                                    <th class="tt">联系人及电话</th>
+{#                                    <th class="tt">会计费截止日期</th>#}
+                                    <th class="tt">会计费年付应收金额</th>
+                                    <th class="tt">企业存续情况</th>
+                                    <th class="tt">新的收费期间(1年)</th>
+                                    <th class="tt">本月应收费金额</th>
+                                    <th class="tt">税控收费截止日期</th>
+                                    <th class="tt">税控收款</th>
+                                    <th class="tt">小规模/一般人</th>
+                                    <th class="tt">会计费收费起始时间</th>
+                                    <th class="tt">会计费收费终止时间</th>
+                                    <th class="tt">交接日期</th>
+                                    <th class="tt">销售</th>
+                                    <th class="tt">工商年报</th>
+                                    <th class="tt">备注</th>
+                                    <th class="tt">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for filed in company_obj %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{% for foo in filed.kans.all %}
+                                            <span>{{ foo.name }}</span>
+                                            {% if  not forloop.last %}
+                                                ,
+                                            {% endif %}
+                                        {% endfor %}
+                                        </td>
+                                        <td>{{ filed.title }}</td>
+                                        <td>{{ filed.phone }}</td>
+{#                                        <td>{{ filed.cost_enddate|date:'Y-m-d' }}</td>#}
+                                        <td>{{ filed.price_year }}</td>
+                                        <td>{{ filed.state }}</td>
+                                        <td>{{ filed.newpay_year }}</td>
+                                        <td>{{ filed.price_month }}</td>
+                                        <td>{{ filed.control_enddate|date:'Y-m-d' }}</td>
+                                        <td>{{ filed.control_price }}</td>
+                                        <td>{{ filed.com_mod }}</td>
+                                        <td>{{ filed.kprice_start|date:'Y-m-d' }}</td>
+                                        <td>{{ filed.kprice_end|date:'Y-m-d' }}</td>
+                                        <td>{{ filed.remove_date|date:'Y-m-d' }}</td>
+                                        <td>{% for foo in filed.soles.all %}
+                                            <span>{{ foo.name }}</span>
+                                            {% if  not forloop.last %}
+                                                ,
+                                            {% endif %}
+                                        {% endfor %}</td>
+                                        <td>{{ filed.buss_price }}</td>
+                                        <td>{{ filed.message }}</td>
+                                        <td>
+                                            <a href="/count_edit/{{ filed.pk }}" class="btn btn-warning btn-sm">编辑</a>
+                                            <a href="/count_del/{{ filed.pk }}" class="btn btn-danger btn-sm">删除</a>
+                                        </td>
+                                    </tr>
+
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        <nav aria-label="Page navigation">
+      <ul class="pagination">
+          {{ page_info.pager|safe }}
+      </ul>
+    </nav>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
